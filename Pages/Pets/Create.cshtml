@@ -1,0 +1,71 @@
+@page
+@model PetAdoptions.Pages.Pets.CreateModel
+@{ViewData["Title"] = "Add New Pet";}
+
+<h1>Add New Pet</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="Pet.Name" class="form-label"></label>
+        <input asp-for="Pet.Name" class="form-control" />
+        <span asp-validation-for="Pet.Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Pet.Species" class="form-label"></label>
+        <input asp-for="Pet.Species" class="form-control" />
+        <span asp-validation-for="Pet.Species" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Pet.Breed" class="form-label"></label>
+        <input asp-for="Pet.Breed" class="form-control" />
+        <span asp-validation-for="Pet.Breed" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Pet.Age" class="form-label"></label>
+        <input asp-for="Pet.Age" class="form-control" />
+        <span asp-validation-for="Pet.Age" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Pet.Status" class="form-label"></label>
+        <select asp-for="Pet.Status" class="form-select">
+            <option>Available</option>
+            <option>Pending</option>
+            <option>Adopted</option>
+        </select>
+        <span asp-validation-for="Pet.Status" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Pet.IntakeDate" class="form-label"></label>
+        <input asp-for="Pet.IntakeDate" type="date" class="form-control" />
+        <span asp-validation-for="Pet.IntakeDate" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Pet.PhotoUrl" class="form-label"></label>
+        <input asp-for="Pet.PhotoUrl" class="form-control" />
+        <span asp-validation-for="Pet.PhotoUrl" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Pet.AdopterId" class="form-label">Adopter (optional)</label>
+        <select asp-for="Pet.AdopterId" class="form-select">
+            <option value="">-- None --</option>
+            @foreach (var adopter in Model.Adopters)
+            {
+                <option value="@adopter.AdopterId">@adopter.FirstName @adopter.LastName</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Pet</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

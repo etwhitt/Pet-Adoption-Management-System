@@ -1,0 +1,39 @@
+@page
+@model PetAdoptions.Pages.Pets.IndexModel
+@{ViewData["Title"] = "Pets";}
+
+<h1>Pets</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Species</th>
+            <th>Breed</th>
+            <th>Age</th>
+            <th>Status</th>
+            <th>Adopter</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pet in Model.Pets)
+        {
+            <tr>
+                <td>@pet.Name</td>
+                <td>@pet.Species</td>
+                <td>@pet.Breed</td>
+                <td>@pet.Age</td>
+                <td>@pet.Status</td>
+                <td>@(pet.Adopter != null ? pet.Adopter.FirstName + " " + pet.Adopter.LastName : "")</td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@pet.PetId">Edit</a> |
+                    <a asp-page="Details" asp-route-id="@pet.PetId">Details</a> |
+                    <a asp-page="Delete" asp-route-id="@pet.PetId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-page="Create" class="btn btn-primary">Add New Pet</a>

@@ -24,4 +24,5 @@ public class Adopter
     public string Address {get; set;} = string.Empty;
 
     public ICollection<Pet> Pets {get; set;} = new List<Pet>();
+    
 }
