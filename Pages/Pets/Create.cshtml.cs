@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using PetAdoptions.Data;
-using PetAdoptions.Models;
+using Microsoft.EntityFrameworkCore;       // For ToListAsync()
+using PetAdoptions.Data;                  // Your PetAdoptionContext
+using PetAdoptions.Models;                // Pet and Adopter classes
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -20,11 +20,12 @@ namespace PetAdoptions.Pages.Pets
         [BindProperty]
         public Pet Pet { get; set; } = default!;
 
-        public IList<Adopter> Adopters { get; set; } = new List<Adopter>();
+        public List<Adopter> Adopters { get; set; } = new List<Adopter>();
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             Adopters = await _context.Adopters.ToListAsync();
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -37,6 +38,7 @@ namespace PetAdoptions.Pages.Pets
 
             _context.Pets.Add(Pet);
             await _context.SaveChangesAsync();
+
             return RedirectToPage("Index");
         }
     }

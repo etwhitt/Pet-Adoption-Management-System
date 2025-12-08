@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using PetAdoptions.Data;
 using PetAdoptions.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PetAdoptions.Pages.Pets
@@ -20,7 +21,8 @@ namespace PetAdoptions.Pages.Pets
         [BindProperty]
         public Pet? Pet { get; set; } = default!;
 
-        public IList<Adopter> Adopters { get; set; } = new List<Adopter>();
+        // Dropdown list for adopters
+        public List<Adopter> Adopters { get; set; } = new List<Adopter>();
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -33,6 +35,7 @@ namespace PetAdoptions.Pages.Pets
             if (Pet == null) return NotFound();
 
             Adopters = await _context.Adopters.ToListAsync();
+
             return Page();
         }
 
@@ -52,7 +55,7 @@ namespace PetAdoptions.Pages.Pets
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!_context.Pets.AnyAsync(p => p.PetId == Pet!.PetId).Result)
+                if (!_context.Pets.Any(p => p.PetId == Pet!.PetId))
                     return NotFound();
                 else
                     throw;

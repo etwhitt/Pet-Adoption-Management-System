@@ -1,6 +1,8 @@
 @page
 @model PetAdoptions.Pages.Pets.CreateModel
-@{ViewData["Title"] = "Add New Pet";}
+@{
+    ViewData["Title"] = "Add New Pet";
+}
 
 <h1>Add New Pet</h1>
 
@@ -25,16 +27,16 @@
 
     <div class="mb-3">
         <label asp-for="Pet.Age" class="form-label"></label>
-        <input asp-for="Pet.Age" class="form-control" />
+        <input asp-for="Pet.Age" type="number" class="form-control" />
         <span asp-validation-for="Pet.Age" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
         <label asp-for="Pet.Status" class="form-label"></label>
         <select asp-for="Pet.Status" class="form-select">
-            <option>Available</option>
-            <option>Pending</option>
-            <option>Adopted</option>
+            <option value="Available">Available</option>
+            <option value="Pending">Pending</option>
+            <option value="Adopted">Adopted</option>
         </select>
         <span asp-validation-for="Pet.Status" class="text-danger"></span>
     </div>
@@ -52,14 +54,15 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="Pet.AdopterId" class="form-label">Adopter (optional)</label>
+        <label asp-for="Pet.AdopterId" class="form-label">Adopter</label>
         <select asp-for="Pet.AdopterId" class="form-select">
-            <option value="">-- None --</option>
+            <option value="">-- Select Adopter --</option>
             @foreach (var adopter in Model.Adopters)
             {
                 <option value="@adopter.AdopterId">@adopter.FirstName @adopter.LastName</option>
             }
         </select>
+        <span asp-validation-for="Pet.AdopterId" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Add Pet</button>

@@ -1,19 +1,34 @@
 @page
 @model PetAdoptions.Pages.Pets.IndexModel
-@{ViewData["Title"] = "Pets";}
+@{
+    ViewData["Title"] = "Pets";
+}
 
 <h1>Pets</h1>
 
-<table class="table">
+<form method="get" class="mb-3">
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search by name or species" name="SearchString" value="@Model.SearchString" />
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+</form>
+
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>Name</th>
+            <th>
+                <a asp-page="./Index" asp-route-SortField="Name" asp-route-SortOrder="@(Model.SortField == "Name" && Model.SortOrder == "asc" ? "desc" : "asc")" asp-route-SearchString="@Model.SearchString">Name</a>
+            </th>
             <th>Species</th>
             <th>Breed</th>
-            <th>Age</th>
-            <th>Status</th>
+            <th>
+                <a asp-page="./Index" asp-route-SortField="Age" asp-route-SortOrder="@(Model.SortField == "Age" && Model.SortOrder == "asc" ? "desc" : "asc")" asp-route-SearchString="@Model.SearchString">Age</a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-SortField="Status" asp-route-SortOrder="@(Model.SortField == "Status" && Model.SortOrder == "asc" ? "desc" : "asc")" asp-route-SearchString="@Model.SearchString">Status</a>
+            </th>
             <th>Adopter</th>
-            <th>Actions</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -25,15 +40,30 @@
                 <td>@pet.Breed</td>
                 <td>@pet.Age</td>
                 <td>@pet.Status</td>
-                <td>@(pet.Adopter != null ? pet.Adopter.FirstName + " " + pet.Adopter.LastName : "")</td>
+                <td>@(pet.Adopter != null ? $"{pet.Adopter.FirstName} {pet.Adopter.LastName}" : "Available")</td>
                 <td>
-                    <a asp-page="Edit" asp-route-id="@pet.PetId">Edit</a> |
-                    <a asp-page="Details" asp-route-id="@pet.PetId">Details</a> |
-                    <a asp-page="Delete" asp-route-id="@pet.PetId">Delete</a>
+                    <a asp-page="./Edit" asp-route-id="@pet.PetId" class="btn btn-sm btn-primary">Edit</a>
+                    <a asp-page="./Details" asp-route-id="@pet.PetId" class="btn btn-sm btn-info">Details</a>
+                    <a asp-page="./Delete" asp-route-id="@pet.PetId" class="btn btn-sm btn-danger">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<a asp-page="Create" class="btn btn-primary">Add New Pet</a>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+            <a class="page-link" asp-page="./Index" asp-route-pageNumber="@(Model.CurrentPage - 1)" asp-route-SearchString="@Model.SearchString" asp-route-SortField="@Model.SortField" asp-route-SortOrder="@Model.SortOrder">Previous</a>
+        </li>
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                <a class="page-link" asp-page="./Index" asp-route-pageNumber="@i" asp-route-SearchString="@Model.SearchString" asp-route-SortField="@Model.SortField" asp-route-SortOrder="@Model.SortOrder">@i</a>
+            </li>
+        }
+        <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+            <a class="page-link" asp-page="./Index" asp-route-pageNumber="@(Model.CurrentPage + 1)" asp-route-SearchString="@Model.SearchString" asp-route-SortField="@Model.SortField" asp-route-SortOrder="@Model.SortOrder">Next</a>
+        </li>
+    </ul>
+</nav>

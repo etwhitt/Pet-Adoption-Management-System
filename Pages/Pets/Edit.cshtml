@@ -7,8 +7,6 @@
 <h1>Edit Pet</h1>
 
 <form method="post">
-    <input type="hidden" asp-for="Pet.PetId" />
-
     <div class="mb-3">
         <label asp-for="Pet.Name" class="form-label"></label>
         <input asp-for="Pet.Name" class="form-control" />
@@ -36,40 +34,33 @@
     <div class="mb-3">
         <label asp-for="Pet.Status" class="form-label"></label>
         <select asp-for="Pet.Status" class="form-select">
-            <option>Available</option>
-            <option>Pending</option>
-            <option>Adopted</option>
+            <option value="Available" selected="@Model.Pet!.Status == "Available"">Available</option>
+            <option value="Pending" selected="@Model.Pet!.Status == "Pending"">Pending</option>
+            <option value="Adopted" selected="@Model.Pet!.Status == "Adopted"">Adopted</option>
         </select>
-        <span asp-validation-for="Pet.Status" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Pet.IntakeDate" class="form-label"></label>
-        <input asp-for="Pet.IntakeDate" type="date" class="form-control" />
-        <span asp-validation-for="Pet.IntakeDate" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Pet.PhotoUrl" class="form-label"></label>
-        <input asp-for="Pet.PhotoUrl" class="form-control" />
-        <span asp-validation-for="Pet.PhotoUrl" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Pet.AdopterId" class="form-label">Adopter (optional)</label>
+        <label asp-for="Pet.AdopterId" class="form-label">Adopter</label>
         <select asp-for="Pet.AdopterId" class="form-select">
-            <option value="">-- None --</option>
+            <option value="">-- Select Adopter --</option>
             @foreach (var adopter in Model.Adopters)
             {
-                <option value="@adopter.AdopterId" selected="@(adopter.AdopterId == Model.Pet.AdopterId)">
+                <option value="@adopter.AdopterId" selected="@Model.Pet!.AdopterId == adopter.AdopterId">
                     @adopter.FirstName @adopter.LastName
                 </option>
             }
         </select>
     </div>
 
-    <button type="submit" class="btn btn-primary">Save Changes</button>
-    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+    <div class="mb-3">
+        <label asp-for="Pet.IntakeDate" class="form-label"></label>
+        <input asp-for="Pet.IntakeDate" class="form-control" type="date" />
+        <span asp-validation-for="Pet.IntakeDate" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-page="./Index" class="btn btn-secondary">Cancel</a>
 </form>
 
 @section Scripts {
