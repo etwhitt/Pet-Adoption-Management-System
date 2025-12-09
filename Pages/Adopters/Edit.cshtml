@@ -1,0 +1,41 @@
+@page "{id:int}"
+@model PetAdoptions.Pages.Adopters.EditModel
+@{
+    ViewData["Title"] = "Edit Adopter";
+}
+<h1>Edit Adopter</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="Adopter.AdopterId" />
+
+    <div class="mb-3">
+        <label asp-for="Adopter.FirstName" class="form-label"></label>
+        <input asp-for="Adopter.FirstName" class="form-control" />
+        <span asp-validation-for="Adopter.FirstName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Adopter.LastName" class="form-label"></label>
+        <input asp-for="Adopter.LastName" class="form-control" />
+        <span asp-validation-for="Adopter.LastName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Adopter.Phone" class="form-label"></label>
+        <input asp-for="Adopter.Phone" class="form-control" />
+        <span asp-validation-for="Adopter.Phone" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Adopter.Email" class="form-label"></label>
+        <input asp-for="Adopter.Email" class="form-control" />
+        <span asp-validation-for="Adopter.Email" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-page="./Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

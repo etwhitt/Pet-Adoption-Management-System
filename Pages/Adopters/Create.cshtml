@@ -1,0 +1,40 @@
+@page
+@model PetAdoptions.Pages.Adopters.CreateModel
+@{
+    ViewData["Title"] = "Add Adopter";
+}
+
+<h1>Add Adopter</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="Adopter.FirstName" class="form-label"></label>
+        <input asp-for="Adopter.FirstName" class="form-control" />
+        <span asp-validation-for="Adopter.FirstName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Adopter.LastName" class="form-label"></label>
+        <input asp-for="Adopter.LastName" class="form-control" />
+        <span asp-validation-for="Adopter.LastName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Adopter.Phone" class="form-label"></label>
+        <input asp-for="Adopter.Phone" class="form-control" />
+        <span asp-validation-for="Adopter.Phone" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Adopter.Email" class="form-label"></label>
+        <input asp-for="Adopter.Email" class="form-control" />
+        <span asp-validation-for="Adopter.Email" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Adopter</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

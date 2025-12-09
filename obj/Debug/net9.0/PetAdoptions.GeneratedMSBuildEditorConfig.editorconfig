@@ -28,6 +28,26 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
+[C:/Users/Eric/PetAdoptions/Pages/Adopters/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRvcHRlcnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eric/PetAdoptions/Pages/Adopters/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRvcHRlcnNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eric/PetAdoptions/Pages/Adopters/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRvcHRlcnNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eric/PetAdoptions/Pages/Adopters/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRvcHRlcnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eric/PetAdoptions/Pages/Adopters/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRvcHRlcnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Eric/PetAdoptions/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

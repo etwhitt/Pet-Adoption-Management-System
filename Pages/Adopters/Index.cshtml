@@ -1,0 +1,62 @@
+@page
+@model PetAdoptions.Pages.Adopters.IndexModel
+@{
+    ViewData["Title"] = "Adopters";
+}
+
+<h1>Adopters</h1>
+
+<a class="btn btn-success mb-3" asp-page="/Adopters/Create">Add New Adopter</a>
+
+<form method="get" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="SearchString" class="form-control"
+               placeholder="Search by name..." value="@Model.SearchString" />
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var a in Model.Adopters)
+        {
+            <tr>
+                <td>@a.FirstName @a.LastName</td>
+                <td>@a.Phone</td>
+                <td>@a.Email</td>
+                <td>
+                    <a asp-page="/Adopters/Edit" asp-route-id="@a.AdopterId" class="btn btn-sm btn-primary">Edit</a>
+                    <a asp-page="/Adopters/Details" asp-route-id="@a.AdopterId" class="btn btn-sm btn-info">Details</a>
+                    <a asp-page="/Adopters/Delete" asp-route-id="@a.AdopterId" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav>
+    <ul class="pagination">
+        <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+            <a class="page-link" asp-route-pageNumber="@(Model.CurrentPage - 1)">Previous</a>
+        </li>
+
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                <a class="page-link" asp-route-pageNumber="@i">@i</a>
+            </li>
+        }
+
+        <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+            <a class="page-link" asp-route-pageNumber="@(Model.CurrentPage + 1)">Next</a>
+        </li>
+    </ul>
+</nav>
