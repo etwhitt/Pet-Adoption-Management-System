@@ -4,33 +4,41 @@
     ViewData["Title"] = "Add Adopter";
 }
 
+<!-- Title. -->
 <h1>Add Adopter</h1>
 
+<!-- Adopter creation form. -->
 <form method="post">
+
+    <!-- Adopter first name. -->
     <div class="mb-3">
         <label asp-for="Adopter.FirstName" class="form-label"></label>
         <input asp-for="Adopter.FirstName" class="form-control" />
         <span asp-validation-for="Adopter.FirstName" class="text-danger"></span>
     </div>
 
+    <!-- Adopter last name. -->
     <div class="mb-3">
         <label asp-for="Adopter.LastName" class="form-label"></label>
         <input asp-for="Adopter.LastName" class="form-control" />
         <span asp-validation-for="Adopter.LastName" class="text-danger"></span>
     </div>
 
+    <!-- Adopter phone number. -->
     <div class="mb-3">
         <label asp-for="Adopter.Phone" class="form-label"></label>
         <input asp-for="Adopter.Phone" class="form-control" />
         <span asp-validation-for="Adopter.Phone" class="text-danger"></span>
     </div>
 
+    <!-- Adopter e-mail. -->
     <div class="mb-3">
         <label asp-for="Adopter.Email" class="form-label"></label>
         <input asp-for="Adopter.Email" class="form-control" />
         <span asp-validation-for="Adopter.Email" class="text-danger"></span>
     </div>
 
+    <!-- Add adopter and cancel buttons. -->
     <button type="submit" class="btn btn-primary">Add Adopter</button>
     <a asp-page="Index" class="btn btn-secondary">Cancel</a>
 </form>

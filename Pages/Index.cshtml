@@ -1,10 +1,71 @@
 ﻿@page
-@model IndexModel
+@model PetAdoptions.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-4">
+
+    <!-- Title of home page with two buttons for quick access to pets and adopters. -->
+    <div class="jumbotron text-center bg-light p-5 rounded mb-5 shadow-sm">
+        <h1 class="display-4">Welcome to the Whitt Pet Adoption Center</h1>
+        <a asp-page="/Pets/Index" class="btn btn-primary btn-lg me-2">View Pets</a>
+        <a asp-page="/Adopters/Index" class="btn btn-primary btn-lg me-2">View Adopters</a>
+    </div>
+
+    <!-- Featured pet section just for fun. Four cards: two dogs and two cats. -->
+    <!-- These don't connect to any animals in the database. I just wanted a nicer homepage. -->
+    <h2 class="mb-4 text-center">Featured Pets</h2>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="col">
+            <div class="card h-100 shadow-sm text-center">
+                <img src="~/images/dog1.jpg" class="card-img-top pet-img" alt="Dog 1">
+                <div class="card-body">
+                    <h5 class="card-title">Buddy</h5>
+                    <p class="card-text">Friendly golden retriever, loves to play fetch.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100 shadow-sm text-center">
+                <img src="~/images/dog2.jpg" class="card-img-top pet-img" alt="Dog 2">
+                <div class="card-body">
+                    <h5 class="card-title">Max</h5>
+                    <p class="card-text">Energetic beagle, perfect for an active family.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100 shadow-sm text-center">
+                <img src="~/images/cat1.jpg" class="card-img-top pet-img" alt="Cat 1">
+                <div class="card-body">
+                    <h5 class="card-title">Whiskers</h5>
+                    <p class="card-text">Playful tabby cat, enjoys sunny windowsills.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100 shadow-sm text-center">
+                <img src="~/images/cat2.jpg" class="card-img-top pet-img" alt="Cat 2">
+                <div class="card-body">
+                    <h5 class="card-title">Luna</h5>
+                    <p class="card-text">Calm black cat, loves gentle cuddles.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Styling for pet images and their cards. -->
+<style>
+    .pet-img {
+        height: 200px;
+        object-fit: cover;
+    }
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+</style>

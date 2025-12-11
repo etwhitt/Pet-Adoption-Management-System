@@ -4,33 +4,41 @@
     ViewData["Title"] = "Add New Pet";
 }
 
+<!-- Title. -->
 <h1>Add New Pet</h1>
 
+<!-- Pet creation form. -->
 <form method="post">
+
+    <!-- Pet name. -->
     <div class="mb-3">
         <label asp-for="Pet.Name" class="form-label"></label>
         <input asp-for="Pet.Name" class="form-control" />
         <span asp-validation-for="Pet.Name" class="text-danger"></span>
     </div>
 
+    <!-- Pet species. -->
     <div class="mb-3">
         <label asp-for="Pet.Species" class="form-label"></label>
         <input asp-for="Pet.Species" class="form-control" />
         <span asp-validation-for="Pet.Species" class="text-danger"></span>
     </div>
 
+    <!-- Pet breed. -->
     <div class="mb-3">
         <label asp-for="Pet.Breed" class="form-label"></label>
         <input asp-for="Pet.Breed" class="form-control" />
         <span asp-validation-for="Pet.Breed" class="text-danger"></span>
     </div>
 
+    <!-- Pet age. -->
     <div class="mb-3">
         <label asp-for="Pet.Age" class="form-label"></label>
         <input asp-for="Pet.Age" type="number" class="form-control" />
         <span asp-validation-for="Pet.Age" class="text-danger"></span>
     </div>
 
+    <!-- Pet status dropdown. -->
     <div class="mb-3">
         <label asp-for="Pet.Status" class="form-label"></label>
         <select asp-for="Pet.Status" class="form-select">
@@ -41,18 +49,14 @@
         <span asp-validation-for="Pet.Status" class="text-danger"></span>
     </div>
 
+    <!-- Pet intake date. -->
     <div class="mb-3">
         <label asp-for="Pet.IntakeDate" class="form-label"></label>
         <input asp-for="Pet.IntakeDate" type="date" class="form-control" />
         <span asp-validation-for="Pet.IntakeDate" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
-        <label asp-for="Pet.PhotoUrl" class="form-label"></label>
-        <input asp-for="Pet.PhotoUrl" class="form-control" />
-        <span asp-validation-for="Pet.PhotoUrl" class="text-danger"></span>
-    </div>
-
+    <!-- Pet adopter dropdown. -->
     <div class="mb-3">
         <label asp-for="Pet.AdopterId" class="form-label">Adopter</label>
         <select asp-for="Pet.AdopterId" class="form-select">
@@ -65,6 +69,7 @@
         <span asp-validation-for="Pet.AdopterId" class="text-danger"></span>
     </div>
 
+    <!-- Submit and cancel buttons. -->
     <button type="submit" class="btn btn-primary">Add Pet</button>
     <a asp-page="Index" class="btn btn-secondary">Cancel</a>
 </form>

@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PetAdoptions.Pages.Pets
-{
+namespace PetAdoptions.Pages.Pets;
+
     public class EditModel : PageModel
     {
         private readonly PetAdoptionContext _context;
@@ -18,12 +18,15 @@ namespace PetAdoptions.Pages.Pets
             _context = context;
         }
 
+        // Pet being edited.
         [BindProperty]
         public Pet? Pet { get; set; } = default!;
 
-        // Dropdown list for adopters
+        // List of adopters for dropdown.
         public List<Adopter> Adopters { get; set; } = new List<Adopter>();
 
+        // Handles GET requests to display form for specific pet.
+        // Shows pet information as well as adopter information, if available.
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null) return NotFound();
@@ -39,10 +42,12 @@ namespace PetAdoptions.Pages.Pets
             return Page();
         }
 
+        // Handles POST requests when form submitted.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
+                // Re-loads dropdown if validation fails.
                 Adopters = await _context.Adopters.ToListAsync();
                 return Page();
             }
@@ -51,6 +56,7 @@ namespace PetAdoptions.Pages.Pets
 
             try
             {
+                // Saves edits to database.
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -64,4 +70,3 @@ namespace PetAdoptions.Pages.Pets
             return RedirectToPage("Index");
         }
     }
-}

@@ -7,11 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PetAdoptions.Pages.Adopters
-{
+namespace PetAdoptions.Pages.Adopters;
+
     public class IndexModel : PageModel
     {
         private readonly PetAdoptionContext _context;
+
+        // Number of pets per page.
         private const int PageSize = 10;
 
         public IndexModel(PetAdoptionContext context)
@@ -19,36 +21,61 @@ namespace PetAdoptions.Pages.Adopters
             _context = context;
         }
 
+        // List of adopters.
         public IList<Adopter> Adopters { get; set; } = default!;
+
+        // Current page.
         public int CurrentPage { get; set; }
+
+        // Total number of pages.
         public int TotalPages { get; set; }
 
+        // User's search input.
         [BindProperty(SupportsGet = true)]
         public string? SearchString { get; set; }
 
+        // Sort field.
+        [BindProperty(SupportsGet = true)]
+        public string? SortField { get; set; }
+
+        // Sort order.
+        [BindProperty(SupportsGet = true)]
+        public string? SortOrder { get; set; } = "asc";
+
+        // Handles GET requests. 
         public async Task OnGetAsync(int pageNumber = 1)
         {
-            IQueryable<Adopter> query = _context.Adopters;
+            IQueryable<Adopter> adoptersIQ = _context.Adopters;
 
-            // Search
+            // Search filtering.
             if (!string.IsNullOrEmpty(SearchString))
             {
-                query = query.Where(a =>
+                adoptersIQ = adoptersIQ.Where(a =>
                     a.FirstName.Contains(SearchString) ||
-                    a.LastName.Contains(SearchString));
+                    a.LastName.Contains(SearchString) ||
+                    a.Phone.Contains(SearchString) ||
+                    a.Email.Contains(SearchString));
             }
 
-            // Paging
-            CurrentPage = pageNumber;
-            int total = await query.CountAsync();
-            TotalPages = (int)System.Math.Ceiling(total / (double)PageSize);
+            // Logic for sorting. 
+            adoptersIQ = SortField switch
+            {
+                "FirstName" => SortOrder == "asc" ? adoptersIQ.OrderBy(a => a.FirstName) : adoptersIQ.OrderByDescending(a => a.FirstName),
+                "LastName" => SortOrder == "asc" ? adoptersIQ.OrderBy(a => a.LastName) : adoptersIQ.OrderByDescending(a => a.LastName),
+                "Phone" => SortOrder == "asc" ? adoptersIQ.OrderBy(a => a.Phone) : adoptersIQ.OrderByDescending(a => a.Phone),
+                "Email" => SortOrder == "asc" ? adoptersIQ.OrderBy(a => a.Email) : adoptersIQ.OrderByDescending(a => a.Email),
+                _ => adoptersIQ.OrderBy(a => a.AdopterId)
+            };
 
-            Adopters = await query
-                .OrderBy(a => a.LastName)
-                .ThenBy(a => a.FirstName)
+            // Pagination. 
+            CurrentPage = pageNumber;
+            int totalCount = await adoptersIQ.CountAsync();
+            TotalPages = (int)System.Math.Ceiling(totalCount / (double)PageSize);
+
+            // Gets results for current page.
+            Adopters = await adoptersIQ
                 .Skip((CurrentPage - 1) * PageSize)
                 .Take(PageSize)
                 .ToListAsync();
         }
     }
-}

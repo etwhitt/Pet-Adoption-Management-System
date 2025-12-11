@@ -4,8 +4,8 @@ using PetAdoptions.Data;
 using PetAdoptions.Models;
 using System.Threading.Tasks;
 
-namespace PetAdoptions.Pages.Adopters
-{
+namespace PetAdoptions.Pages.Adopters;
+
     public class CreateModel : PageModel
     {
         private readonly PetAdoptionContext _context;
@@ -18,16 +18,18 @@ namespace PetAdoptions.Pages.Adopters
         [BindProperty]
         public Adopter Adopter { get; set; } = new();
 
+        // Handles GET requests.
         public IActionResult OnGet() => Page();
 
+        // Handles POST requests.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid) return Page();
 
+            // Adds and saves adopter to database.
             _context.Adopters.Add(Adopter);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("Index");
         }
     }
-}

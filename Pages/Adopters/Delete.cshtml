@@ -4,21 +4,29 @@
     ViewData["Title"] = "Delete Adopter";
 }
 
+<!-- Title. -->
 <h1>Delete Adopter</h1>
 
+<!-- Confirmation message. -->
 <h3>Are you sure you want to delete this adopter?</h3>
 
+<!-- Adopter information table. -->
 <dl class="row">
+
+    <!-- Adopter name. -->
     <dt class="col-sm-2">Name</dt>
     <dd class="col-sm-10">@Model.Adopter!.FirstName @Model.Adopter.LastName</dd>
 
+    <!-- Adopter phone number. -->
     <dt class="col-sm-2">Phone</dt>
     <dd class="col-sm-10">@Model.Adopter.Phone</dd>
 
+    <!-- Adopter e-mail. -->
     <dt class="col-sm-2">Email</dt>
     <dd class="col-sm-10">@Model.Adopter.Email</dd>
 </dl>
 
+<!-- Warning message if adopter is associated with pet. -->
 @if (Model.Adopter.Pets.Count > 0)
 {
     <div class="alert alert-danger">
@@ -26,9 +34,11 @@
     </div>
 }
 
+<!-- Deletion form. -->
 <form method="post">
     <input type="hidden" asp-for="Adopter.AdopterId" />
 
+    <!-- Disables delete button if adopter associated with pet. -->
     <button type="submit" class="btn btn-danger"
             @(Model.Adopter.Pets.Count > 0 ? "disabled" : "")>
         Delete

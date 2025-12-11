@@ -2,30 +2,31 @@ using Microsoft.EntityFrameworkCore;
 using PetAdoptions.Models;
 using System;
 
-namespace PetAdoptions.Data
-{
+namespace PetAdoptions.Data;
+
     public class PetAdoptionContext : DbContext
     {
-        public PetAdoptionContext(DbContextOptions<PetAdoptionContext> options)
-            : base(options)
-        {
-        }
+        public PetAdoptionContext(DbContextOptions<PetAdoptionContext> options) : base(options){}
 
+        // Pets table in database.
         public DbSet<Pet> Pets { get; set; } = default!;
+
+        // Adopters table in database.
         public DbSet<Adopter> Adopters { get; set; } = default!;
 
+        // Configures and seeds database.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Seed Adopters
+            // Seeds adopters. Information provided by AI.
             modelBuilder.Entity<Adopter>().HasData(
                 new Adopter { AdopterId = 1, FirstName = "Alice", LastName = "Smith", Email = "alice@example.com", Phone = "123-456-7890", Address = "123 Main St" },
                 new Adopter { AdopterId = 2, FirstName = "Bob", LastName = "Jones", Email = "bob@example.com", Phone = "987-654-3210", Address = "456 Oak Ave" },
                 new Adopter { AdopterId = 3, FirstName = "Carol", LastName = "Taylor", Email = "carol@example.com", Phone = "555-555-5555", Address = "789 Pine Rd" }
             );
 
-            // Seed Pets (25+)
+            // Seeds pets. Information provided by AI.
             modelBuilder.Entity<Pet>().HasData(
                 new Pet { PetId = 1, Name = "Fluffy", Species = "Cat", Breed = "Siamese", Age = 2, Status = "Available", IntakeDate = new DateTime(2025,12,1), AdopterId = null },
                 new Pet { PetId = 2, Name = "Buddy", Species = "Dog", Breed = "Beagle", Age = 3, Status = "Available", IntakeDate = new DateTime(2025,11,28), AdopterId = null },
@@ -55,4 +56,3 @@ namespace PetAdoptions.Data
             );
         }
     }
-}

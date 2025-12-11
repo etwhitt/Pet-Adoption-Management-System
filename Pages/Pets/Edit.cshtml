@@ -4,33 +4,40 @@
     ViewData["Title"] = "Edit Pet";
 }
 
+<!-- Page title. -->
 <h1>Edit Pet</h1>
 
+<!-- Ped edit form. -->
 <form method="post">
+    <!-- Pet name. -->
     <div class="mb-3">
         <label asp-for="Pet.Name" class="form-label"></label>
         <input asp-for="Pet.Name" class="form-control" />
         <span asp-validation-for="Pet.Name" class="text-danger"></span>
     </div>
 
+    <!-- Pet species. -->
     <div class="mb-3">
         <label asp-for="Pet.Species" class="form-label"></label>
         <input asp-for="Pet.Species" class="form-control" />
         <span asp-validation-for="Pet.Species" class="text-danger"></span>
     </div>
 
+    <!-- Pet breed. -->
     <div class="mb-3">
         <label asp-for="Pet.Breed" class="form-label"></label>
         <input asp-for="Pet.Breed" class="form-control" />
         <span asp-validation-for="Pet.Breed" class="text-danger"></span>
     </div>
 
+    <!-- Pet age. -->
     <div class="mb-3">
         <label asp-for="Pet.Age" class="form-label"></label>
         <input asp-for="Pet.Age" class="form-control" />
         <span asp-validation-for="Pet.Age" class="text-danger"></span>
     </div>
 
+    <!-- Pet status dropdown i.e. available, pending, adopted. -->
     <div class="mb-3">
         <label asp-for="Pet.Status" class="form-label"></label>
         <select asp-for="Pet.Status" class="form-select">
@@ -40,6 +47,8 @@
         </select>
     </div>
 
+    <!-- Adopter dropdown. -->
+    <!-- Loops through available adopters for dropdown list. -->
     <div class="mb-3">
         <label asp-for="Pet.AdopterId" class="form-label">Adopter</label>
         <select asp-for="Pet.AdopterId" class="form-select">
@@ -53,12 +62,14 @@
         </select>
     </div>
 
+    <!-- Pet intake date. -->
     <div class="mb-3">
         <label asp-for="Pet.IntakeDate" class="form-label"></label>
         <input asp-for="Pet.IntakeDate" class="form-control" type="date" />
         <span asp-validation-for="Pet.IntakeDate" class="text-danger"></span>
     </div>
 
+    <!-- Submit and cancel buttons. -->
     <button type="submit" class="btn btn-primary">Save</button>
     <a asp-page="./Index" class="btn btn-secondary">Cancel</a>
 </form>
